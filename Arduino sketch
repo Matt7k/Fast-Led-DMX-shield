@@ -1,0 +1,38 @@
+#include <FastLED.h>
+#include <Conceptinetics.h>
+#define NUM_LEDS 60
+#define DATA_PIN 13
+#define DMX_SLAVE_CHANNELS 1
+CRGB leds[NUM_LEDS];
+DMX_Slave dmx_slave ( DMX_SLAVE_CHANNELS );
+
+void setup() { 
+  FastLED.addLeds<WS2812, DATA_PIN>(leds, NUM_LEDS);
+  dmx_slave.enable ();  
+  dmx_slave.setStartAddress (1);
+}
+
+void loop() {
+    int val = ( dmx_slave.getChannelValue (1)); 
+    //retrieve the dmx value on channel 1 and save it to val.
+    
+    int numLedsToLight = map(val, 0, 255, 0, NUM_LEDS); 
+    // Mapping function that translates the dmx value (0 to 255) saved in val to the number of leds that should be lit (0 to 60).
+    
+    FastLED.clear();
+    //not sure if this clear function is still needed.
+    
+  for(int led = 0; led < 30; led++) { 
+        leds[led] = CRGB::Green; 
+    } 
+    
+for(int led = 30; led < 60; led++) { 
+        leds[led] = CRGB::Red; 
+    }
+    
+for(int led =numLedsToLight; led <NUM_LEDS ; led++) { 
+        leds[led] = CRGB::Black; 
+    }
+    
+    FastLED.show();
+}
