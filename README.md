@@ -4,6 +4,8 @@ WS2812B tape with map controlled by dmx
 GOAL: Control the mapping of a WS2812B led tape through a DMX shield, using only a single channel of dmx from a small console.
 PROBLEM: The LEDs are flickering.
 
+Software Version: Arduino 1.8.5, FastLED 3.1.6, Conceptinetics_RDM_alpha3
+
 Parts: 
 1x - Arduino Uno R3 
 1x - CITC-DRA-10-R2 (Dmx shield by Conceptinetics)
